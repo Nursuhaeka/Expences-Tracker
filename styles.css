@@ -1,0 +1,270 @@
+/* General reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+h1, h2, h3 {
+    font-family: 'Roboto', sans-serif;
+    color: #4a2c8b; /* Dark Purple */
+}
+
+/* Header */
+.header {
+    background: linear-gradient(45deg, #6a4c9c, #9c7ed9); /* Gradient Purple */
+    color: white;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header .logo img {
+    width: 180px; 
+    height: auto; 
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+.nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.nav ul li {
+    margin: 0 20px;
+}
+
+.nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.nav ul li a:hover {
+    color: #f8e6ff;
+}
+
+/* Main Content */
+.main-content {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.banner {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.banner h1 {
+    font-size: 40px;
+    font-weight: 700;
+    color: #4a2c8b;
+}
+
+.banner p {
+    font-size: 18px;
+    color: #666;
+}
+
+.dashboard, .add-expense, .budgeting, .reports {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+}
+
+/* Buttons */
+button {
+    padding: 12px 25px; /* Adjusted padding for better button proportions */
+    background-color: #6a4c9c;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Added subtle shadow for depth */
+}
+
+button:hover {
+    background-color: #4a2c8b;
+    transform: scale(1.05); /* Slight scale effect on hover for interactivity */
+}
+
+/* Form Fields */
+input[type="number"], input[type="text"], textarea, select {
+    width: 100%;
+    padding: 12px;
+    margin: 12px 0;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+input[type="number"]:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: #6a4c9c;
+    box-shadow: 0 0 8px rgba(106, 76, 156, 0.5);
+}
+
+/* Footer */
+.footer {
+    background-color: #6a4c9c;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    margin-top: 40px;
+}
+
+/* Grid Layout for Dashboard */
+.dashboard .summary {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.dashboard .expense-summary, .dashboard .budget-summary {
+    background: #f5f5f5;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+.dashboard .expense-summary h2, .dashboard .budget-summary h2 {
+    font-size: 24px;
+    color: #6a4c9c;
+}
+
+.dashboard .expense-summary p, .dashboard .budget-summary p {
+    font-size: 16px;
+    color: #777;
+}
+
+/* Animated Card Hover Effect */
+.dashboard .expense-summary:hover, .dashboard .budget-summary:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+/* Modal Background */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; 
+    z-index: 1000; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0, 0, 0, 0.4); /* Black background with opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: white;
+    margin: 15% auto; /* 15% from the top, centered */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 90%; /* Responsive width */
+    max-width: 400px; /* Limit maximum width */
+    text-align: center;
+}
+
+/* Close Button */
+.modal-content .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.modal-content .close:hover,
+.modal-content .close:focus {
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Modal Header */
+.modal-content h2 {
+    font-family: 'Roboto', sans-serif;
+    color: #6a4c9c;
+    margin-bottom: 20px;
+}
+
+/* Modal Form */
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.modal-content form input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.modal-content form input:focus {
+    outline: none;
+    border-color: #6a4c9c;
+    box-shadow: 0 0 8px rgba(106, 76, 156, 0.5);
+}
+
+.modal-content form button {
+    background-color: #6a4c9c;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.modal-content form button:hover {
+    background-color: #4a2c8b;
+    transform: scale(1.05);
+}
+
+/* Responsive Modal */
+@media screen and (max-width: 768px) {
+    .nav ul {
+        flex-direction: column;
+    }
+
+    .dashboard .summary {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-content {
+        margin: 25% auto; /* Adjusted top margin for smaller screens */
+    }
+
+    .footer {
+        font-size: 14px;
+    }
+}

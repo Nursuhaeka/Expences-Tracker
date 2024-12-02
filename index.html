@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Sign Up - Expenses Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .form-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f9f9f9;
+        }
+        .form-box {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .form-box h2 {
+            font-family: 'Roboto', sans-serif;
+            color: #6a4c9c;
+            margin-bottom: 20px;
+        }
+        .form-box input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            margin-bottom: 15px;
+        }
+        .form-box button {
+            background-color: #6a4c9c;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .form-box button:hover {
+            background-color: #4a2c8b;
+            transform: scale(1.05);
+        }
+        .form-box p {
+            color: #666;
+        }
+        .toggle-links {
+            margin-top: 15px;
+        }
+        .toggle-links a {
+            color: #6a4c9c;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .toggle-links a:hover {
+            color: #4a2c8b;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img id="logoImage" src="image/logo.webp" alt="Expenses Tracker Logo">
+        </div>
+    </header>
+
+    <main class="form-container">
+        <div class="form-box" id="login-box">
+            <h2>Login to Your Account</h2>
+            <form id="login-form">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+
+                <button type="submit">Login</button>
+            </form>
+            <p>Don't have an account? <a href="javascript:void(0)" onclick="toggleForm('signup')">Sign up</a></p>
+        </div>
+
+        <div class="form-box" id="signup-box" style="display: none;">
+            <h2>Create a New Account</h2>
+            <form id="signup-form">
+                <label for="new-username">Username:</label>
+                <input type="text" id="new-username" name="username" required>
+
+                <label for="new-password">Password:</label>
+                <input type="password" id="new-password" name="password" required>
+
+                <label for="confirm-password">Confirm Password:</label>
+                <input type="password" id="confirm-password" name="confirm-password" required>
+
+                <button type="submit">Sign Up</button>
+            </form>
+            <p>Already have an account? <a href="javascript:void(0)" onclick="toggleForm('login')">Login</a></p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 Expenses Tracker</p>
+    </footer>
+
+    <script>
+        // Toggle between login and signup forms
+        function toggleForm(formType) {
+            if (formType === 'signup') {
+                document.getElementById('login-box').style.display = 'none';
+                document.getElementById('signup-box').style.display = 'block';
+            } else {
+                document.getElementById('signup-box').style.display = 'none';
+                document.getElementById('login-box').style.display = 'block';
+            }
+        }
+
+        // Login form submission
+        document.getElementById('login-form').addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent form submission
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Get users array from sessionStorage
+            const users = JSON.parse(sessionStorage.getItem('users')) || [];
+
+            // Find user with matching credentials
+            const user = users.find(user => user.username === username && user.password === password);
+
+            if (user) {
+                alert('Login successful!');
+                sessionStorage.setItem('loggedIn', true);
+                sessionStorage.setItem('username', username); // Store username in sessionStorage
+                window.location.href = 'index.html'; // Redirect to index.html after login
+            } else {
+                alert('Invalid username or password.');
+            }
+        });
+
+        // Sign up form submission
+        document.getElementById('signup-form').addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent form submission
+
+            const newUsername = document.getElementById('new-username').value;
+            const newPassword = document.getElementById('new-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            // Validate password match
+            if (newPassword !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+
+            // Retrieve existing users from sessionStorage
+            const users = JSON.parse(sessionStorage.getItem('users')) || [];
+
+            // Check if username already exists
+            if (users.some(user => user.username === newUsername)) {
+                alert('Username is already taken. Please choose another.');
+                return;
+            }
+
+            // Add new user to users array
+            users.push({ username: newUsername, password: newPassword });
+
+            // Save updated users array to sessionStorage
+            sessionStorage.setItem('users', JSON.stringify(users));
+
+            alert('Signup successful! You can now log in.');
+            toggleForm('login'); // Switch back to login form after signup
+        });
+    </script>
+</body>
+</html>
